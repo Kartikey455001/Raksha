@@ -21,7 +21,8 @@ export class ApiError extends Error {
   }
 }
 
-const BASE = '/api/v1';
+const API_HOST = (import.meta.env.VITE_API_URL || (import.meta.env.DEV ? '' : 'https://raksha-zcld.onrender.com')).replace(/\/$/, '');
+const BASE = `${API_HOST}/api/v1`;
 
 export async function api<T = any>(path: string, opts: { method?: string; body?: any; headers?: Record<string, string>; auth?: boolean } = {}): Promise<T> {
   const headers: Record<string, string> = { ...(opts.headers ?? {}) };
